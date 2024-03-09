@@ -1,15 +1,15 @@
 # module-claim
 
-## Module Contract
-
-```
-cd packages/module
-```
-
 To install dependencies:
 
 ```bash
 bun install
+```
+
+## Module Contract
+
+```
+cd packages/module
 ```
 
 To build:
