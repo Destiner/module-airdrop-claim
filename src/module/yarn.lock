@@ -511,10 +511,10 @@
   resolved "https://registry.yarnpkg.com/@prb/math/-/math-4.0.2.tgz#0bcbc34eb2c49c56b70ded059d0af28c09b7833a"
   integrity sha512-kJgqvXR6iyU7+N959RzggSFhBdnRuSDnc/bs8u6MzdWw7aYIUaAr+uMVdpP6Dheypjerd7sfJgFOs19FRFhscg==
 
-"@rhinestone/modulekit@^0.3.6":
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/@rhinestone/modulekit/-/modulekit-0.3.6.tgz#8daa6d5aa4b163ab36dc85dfd8c48366e5480b76"
-  integrity sha512-BYhpJVjBWWGso4y1shObXbQBRqa3YvqQRpg8FFSw9PItFP8dVdN2VVlJDcBBGIpgbDAxijDxkmv//Brmb9aOGA==
+"@rhinestone/modulekit@^0.3.7":
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/@rhinestone/modulekit/-/modulekit-0.3.7.tgz#8254408954c27f95ea75d617b095bcc9a626fd4e"
+  integrity sha512-carC04cDITQ5aIMs6EmHoQwyCQM14cXd4Jq0XTIA/u5o5NKRvuHfZrYj21j/5t/Ej1wsfvjxg/aNIyxMWWulkA==
 
 "@safe-global/safe-contracts@1.4.1-build.0":
   version "1.4.1-build.0"
