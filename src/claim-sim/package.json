@@ -1,0 +1,12 @@
+{
+  "name": "claim-sim",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "merkletreejs": "^0.3.11",
+    "typescript": "^5.4.2",
+    "viem": "^2.7.22"
+  }
+}
