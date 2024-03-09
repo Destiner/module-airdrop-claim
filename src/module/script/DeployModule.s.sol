@@ -5,14 +5,14 @@ import "forge-std/Script.sol";
 import { RegistryDeployer } from "modulekit/deployment/RegistryDeployer.sol";
 
 // Import modules here
-import { ExecutorTemplate } from "src/ExecutorTemplate.sol";
+import { AirdropModule } from "../src/AirdropModule.sol";
 
 /// @title DeployModuleScript
 contract DeployModuleScript is Script, RegistryDeployer {
     function run() public {
         // Setup module bytecode, deploy params, and data
         // bytes memory bytecode = type(ExecutorTemplate).creationCode;
-        bytes memory bytecode = type(ValidatorTemplate).creationCode;
+        bytes memory bytecode = type(AirdropModule).creationCode;
         bytes memory deployParams = "";
         bytes memory data = "";
 
