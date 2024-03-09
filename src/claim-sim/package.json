@@ -4,9 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^20.11.25",
     "dotenv": "^16.4.5",
     "merkletreejs": "^0.3.11",
     "typescript": "^5.4.2",
     "viem": "^2.7.22"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.1"
   }
 }
