@@ -10,7 +10,7 @@ import {
 } from "modulekit/ModuleKit.sol";
 import { MODULE_TYPE_EXECUTOR } from "modulekit/external/ERC7579.sol";
 import { ExecutionLib } from "erc7579/lib/ExecutionLib.sol";
-import { ExecutorTemplate } from "src/ExecutorTemplate.sol";
+import { AirdropModule } from "src/AirdropModule.sol";
 
 contract ExecutorTemplateTest is RhinestoneModuleKit, Test {
     using ModuleKitHelpers for *;
@@ -18,7 +18,7 @@ contract ExecutorTemplateTest is RhinestoneModuleKit, Test {
 
     // account and modules
     AccountInstance internal instance;
-    ExecutorTemplate internal executor;
+    AirdropModule internal executor;
 
     function setUp() public {
         init();
