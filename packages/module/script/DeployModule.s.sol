@@ -5,8 +5,7 @@ import "forge-std/Script.sol";
 import { RegistryDeployer } from "modulekit/deployment/RegistryDeployer.sol";
 
 // Import modules here
-import { ValidatorTemplate } from "src/ValidatorTemplate.sol";
-// import { ExecutorTemplate } from "src/ExecutorTemplate.sol";
+import { ExecutorTemplate } from "src/ExecutorTemplate.sol";
 
 /// @title DeployModuleScript
 contract DeployModuleScript is Script, RegistryDeployer {
