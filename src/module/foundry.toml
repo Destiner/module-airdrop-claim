@@ -8,6 +8,7 @@ allow_paths = ["*", "/"]
 
 [rpc_endpoints]
 mainnet = "https://rpc.ankr.com/eth"
+sepolia = "https://rpc.ankr.com/eth/sepolia"
 
 [fmt]
 bracket_spacing = true
