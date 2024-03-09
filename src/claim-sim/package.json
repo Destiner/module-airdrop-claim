@@ -7,6 +7,7 @@
     "@types/node": "^20.11.25",
     "dotenv": "^16.4.5",
     "merkletreejs": "^0.3.11",
+    "solidity-create2-deployer": "^0.4.0",
     "typescript": "^5.4.2",
     "viem": "^2.7.22"
   },
