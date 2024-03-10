@@ -3,7 +3,7 @@ import { MerkleTree } from "merkletreejs";
 
 import { getAddress } from "./account";
 
-const airdropContractAddress = "0x04Fe91244F8aB4eba7961843DAcA80a5F5B333CE";
+const airdropContractAddress = "0x49cDC92DF499557F3E7f178a93978386B14AEDA4";
 const tokenAddress = "0x1E53588a0f3d3BEf7308655FAEa92eCc9403600f";
 const sellTokenAddress = "0xceCB44ef523e82D4F48Db489F0f60c9004314fb5";
 

@@ -4,12 +4,15 @@ import {
   encodeAbiParameters,
   Hex,
   zeroHash,
+  encodeFunctionData,
   // parseUnits,
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia } from "viem/chains";
 
+import msaAdvancedAbi from "../abi/msaAdvanced";
 import airdropModuleAbi from "../abi/airdropModule";
+import entrypointAbi from "../abi/entrypoint";
 import { deploymentRpc, privateKey } from "../utils/env";
 import { getOrCreateAccount, moduleAddress } from "../utils/account";
 import {
@@ -58,5 +61,25 @@ async function main() {
     args: [executeData],
   });
 }
+
+function encodeToBytes32(value1: number, value2: number): Hex {
+  // Create two buffers of 16 bytes each for uint128 values
+  const buffer1 = Buffer.alloc(16);
+  const buffer2 = Buffer.alloc(16);
+
+  // Write the numbers into the buffers as big-endian uint128
+  buffer1.writeBigUInt64BE(BigInt(value1), 8); // Write the lower 8 bytes
+  buffer2.writeBigUInt64BE(BigInt(value2), 8); // Write the lower 8 bytes
+
+  // Combine the two buffers into a single Buffer of 32 bytes
+  const combined = Buffer.concat([buffer1, buffer2]);
+
+  // Return the combined buffer as a hex string
+  return ("0x" + combined.toString("hex")) as Hex;
+}
+
+// Usage
+const bytes32 = encodeToBytes32(2e6, 2e6);
+console.log(bytes32);
 
 main();
