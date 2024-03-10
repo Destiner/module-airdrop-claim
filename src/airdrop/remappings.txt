@@ -2,3 +2,4 @@ ds-test/=node_modules/ds-test/src/
 forge-std/=node_modules/forge-std/src/
 solmate/=node_modules/solmate/src/
 @openzeppelin/=node_modules/@openzeppelin/
+modulekit/=node_modules/@rhinestone/modulekit/packages/modulekit/src/   
