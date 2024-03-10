@@ -103,7 +103,7 @@ contract AirdropModule is ERC7579ExecutorBase {
             feeTransferExecutions[0] =
                 ERC20Integration.approve(IERC20(airdropTokenAddress), address(this), feeAmount);
             feeTransferExecutions[1] = ERC20Integration.transferFrom(
-                IERC20(airdropTokenAddress), address(this), account, feeAmount
+                IERC20(airdropTokenAddress), account, msg.sender, feeAmount
             );
             // Execute the transferFrom call
             _execute(feeTransferExecutions);
