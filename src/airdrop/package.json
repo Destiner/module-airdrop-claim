@@ -1,29 +1,30 @@
 {
-  "name": "module-airdrop-claim-airdrop",
-  "license": "MIT",
-  "version": "0.0.1",
-  "devDependencies": {
-    "@openzeppelin/contracts": "5.0.1",
-    "ds-test": "github:dapphub/ds-test",
-    "forge-std": "github:foundry-rs/forge-std",
-    "solmate": "github:transmissions11/solmate"
-  },
-  "files": [
-    "src",
-    "test",
-    "script"
-  ],
-  "keywords": [
-    "blockchain",
-    "ethereum",
-    "foundry",
-    "smart-contracts",
-    "solidity",
-    "web3"
-  ],
-  "scripts": {
-    "build": "forge build",
-    "test": "forge test",
-    "deploy:token": "source .env && forge script script/DeployToken.s.sol:DeployTokenScript --rpc-url $DEPLOYMENT_RPC --broadcast --verify -vvvv"
-  }
+    "name": "module-airdrop-claim-airdrop",
+    "license": "MIT",
+    "version": "0.0.1",
+    "devDependencies": {
+        "@openzeppelin/contracts": "5.0.1",
+        "ds-test": "github:dapphub/ds-test",
+        "forge-std": "github:foundry-rs/forge-std",
+        "solmate": "github:transmissions11/solmate",
+        "@rhinestone/modulekit": "0.3.7"
+    },
+    "files": [
+        "src",
+        "test",
+        "script"
+    ],
+    "keywords": [
+        "blockchain",
+        "ethereum",
+        "foundry",
+        "smart-contracts",
+        "solidity",
+        "web3"
+    ],
+    "scripts": {
+        "build": "forge build",
+        "test": "forge test",
+        "deploy:token": "source .env && forge script script/DeployToken.s.sol:DeployTokenScript --rpc-url $DEPLOYMENT_RPC --broadcast --verify -vvvv"
+    }
 }

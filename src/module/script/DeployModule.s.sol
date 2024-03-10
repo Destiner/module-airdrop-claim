@@ -6,6 +6,7 @@ import { RegistryDeployer } from "modulekit/deployment/RegistryDeployer.sol";
 
 // Import modules here
 import { AirdropModule } from "../src/AirdropModule.sol";
+import { Create2 } from "../src/Create2.sol";
 
 /// @title DeployModuleScript
 contract DeployModuleScript is Script, RegistryDeployer {
@@ -15,7 +16,6 @@ contract DeployModuleScript is Script, RegistryDeployer {
         bytes memory bytecode = type(AirdropModule).creationCode;
         bytes memory deployParams = "";
         bytes memory data = "";
-
         // Get private key for deployment
         vm.startBroadcast(vm.envUint("PK"));
 
