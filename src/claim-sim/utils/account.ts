@@ -40,7 +40,7 @@ const validatorData = encodeAbiParameters(
   [account.address]
 );
 
-const moduleAddress = "0xB18003A7c7288ed08413eAeD0C9D16e5c7632376";
+const moduleAddress = "0x9d59106fD52ddC8d0F746108479E471791B3F598";
 const moduleData = encodeAbiParameters(
   [
     { name: "sellToken", type: "address" },
