@@ -33,7 +33,7 @@ const pool = new Pool(
   4657
 );
 const tickLower: number = -60;
-const tickUpper: number = 6000;
+const tickUpper: number = 60;
 const useFullPrecision: boolean = true;
 
 async function main() {
