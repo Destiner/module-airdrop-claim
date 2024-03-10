@@ -12,8 +12,9 @@ import { sepolia } from "viem/chains";
 import bootstrapAbi from "../abi/msaBootstrap";
 import factoryAbi from "../abi/msaFactory";
 import msaAdvancedAbi from "../abi/msaAdvanced";
-import { privateKey } from "../utils/env";
+import { deploymentRpc, privateKey } from "../utils/env";
 
+const account = privateKeyToAccount(privateKey);
 const publicClient = createPublicClient({
     chain: sepolia,
     transport: http(),
