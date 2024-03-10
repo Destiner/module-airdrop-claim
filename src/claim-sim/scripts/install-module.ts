@@ -1,12 +1,9 @@
-import { createPublicClient, createWalletClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
+import { createPublicClient, http } from "viem";
 import { sepolia } from "viem/chains";
 
 import msaAdvancedAbi from "../abi/msaAdvanced";
-import { deploymentRpc, privateKey } from "../utils/env";
 import { getAccount } from "../utils/account";
 
-const account = privateKeyToAccount(privateKey);
 const publicClient = createPublicClient({
   chain: sepolia,
   transport: http(),
