@@ -15,7 +15,7 @@ const publicClient = createPublicClient({
 async function main() {
   // Check whether the module is installed
   const account = await getAccount();
-  const moduleAddress = "0xB9fA6fEe2bFD3B40106B29D81544FBa045dfB236";
+  const moduleAddress = "0xB18003A7c7288ed08413eAeD0C9D16e5c7632376";
 
   const isInstalled = await publicClient.readContract({
     address: account,

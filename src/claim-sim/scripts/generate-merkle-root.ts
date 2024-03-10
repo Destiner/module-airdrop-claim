@@ -8,27 +8,27 @@ interface Recipient {
 
 const recipients: Recipient[] = [
   {
-    address: "0x34a58602Ac47353B8883d3437463D283eB1bc588",
+    address: "0x0c67f5b79861e5b7166cdca9c50d6969f154c018",
     value: 1000000000000000000n,
   },
   {
-    address: "0xe7c0ABb3A8B3F725A2b031efb8cee1a731726D25",
+    address: "0xfF7a3220f63c4412407D45aBD82A5Fd89077C6cD",
     value: 2000000000000000000n,
   },
   {
-    address: "0xfA671A90653bb4e96f8B6A7e43F9287BDf12dd70",
+    address: "0xBA36a6c52f991b97fB923D3530a0deEb07488b84",
     value: 3000000000000000000n,
   },
   {
-    address: "0xCFFd334c7aD0bEba4B4f626e1099d3a3B1378366",
+    address: "0x5aa291FCC1674BCe7405c18C10042FD2c124EDf0",
     value: 4000000000000000000n,
   },
   {
-    address: "0x9a6De3F5A76D40A14E64cd68C3Fd7d6e36AE9Ad1",
+    address: "0xd564686e5076e4e92a525fD3217b0bDbBED61887",
     value: 5000000000000000000n,
   },
   {
-    address: "0xFe01a6920C2c398F5805c0fc1312882CE8fF00ec",
+    address: "0x97A24cE739c7BB2d0940A3C1f98d04Bee0DDB57e",
     value: 6000000000000000000n,
   },
 ];
@@ -58,11 +58,11 @@ const merkleRoot: string = merkleTree.getHexRoot();
 
 console.log("Merkle Root:", merkleRoot);
 
-const proofB = merkleTree.getHexProof(
-  generateLeaf(1n, recipients[1].address, recipients[1].value)
+const proof = merkleTree.getHexProof(
+  generateLeaf(0n, recipients[0].address, recipients[0].value)
 );
 // const proofs = merkleTree.getHexProofs();
 
 console.log(merkleTree.toString());
 
-console.log("Proof B", proofB);
+console.log("Proof", proof);

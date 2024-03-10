@@ -39,7 +39,7 @@ async function getAccount() {
     [account.address]
   );
 
-  const moduleAddress = "0xB9fA6fEe2bFD3B40106B29D81544FBa045dfB236";
+  const moduleAddress = "0xB18003A7c7288ed08413eAeD0C9D16e5c7632376";
   const moduleData = encodeAbiParameters(
     [
       { name: "sellToken", type: "address" },
