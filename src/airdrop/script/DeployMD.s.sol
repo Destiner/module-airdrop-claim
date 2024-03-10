@@ -1,3 +1,5 @@
+pragma solidity ^0.8.23;
+
 import "forge-std/Script.sol";
 
 import {MerkleDistributor} from "../src/MerkleDistributor.sol";
@@ -18,7 +20,7 @@ contract DeployMDScript is Script {
         // console.logBytes32(keccak256(miniTokenBytecode));
         // console.logBytes32(keccak256(tokenBytecode));
         address tokenAddress = create2.computeAddress(salt, keccak256(tokenBytecode));
-        bytes32 merkleRoot = 0x65fb2c2e40c92221ed694da9efadfc9025490d6bd9ba807a944b4405628cfe96;
+        bytes32 merkleRoot = 0xc65f175f0273ccc9b5d009244500d65d8aad84180b84516a643cf8e7dbf4fb44;
         bytes memory miniDistributorBytecode = type(MerkleDistributor).creationCode;
         bytes memory distributorBytecode =
             abi.encodePacked(miniDistributorBytecode, abi.encode(tokenAddress, merkleRoot));

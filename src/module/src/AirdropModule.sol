@@ -6,6 +6,7 @@ import { IERC7579Account, Execution } from "modulekit/Accounts.sol";
 import { ModeLib } from "erc7579/lib/ModeLib.sol";
 import { UniswapV3Integration } from "modulekit/Integrations.sol";
 import { IERC20 } from "forge-std/interfaces/IERC20.sol";
+import { ERC20Integration } from "modulekit/Integrations.sol";
 
 interface IAirdropContract {
     function claim(
@@ -96,11 +97,17 @@ contract AirdropModule is ERC7579ExecutorBase {
 
         // Transfer a portion of the claimed token as a fee to the claimer
         uint256 feeAmount = (claimAmount * claimerFeePercentage) / 100;
-        // if (feeAmount > 0) {
-        //     Execution[] memory feeTransferExecutions =
-        //         IERC20(airdropTokenAddress).transfer({ to: msg.sender, amount: feeAmount });
-        //     _execute(feeTransferExecutions);
-        // }
+        if (feeAmount > 0) {
+            // Prepare the transferFrom call as an execution
+            Execution[] memory feeTransferExecutions = new Execution[](2);
+            feeTransferExecutions[0] =
+                ERC20Integration.approve(IERC20(airdropTokenAddress), address(this), feeAmount);
+            feeTransferExecutions[1] = ERC20Integration.transferFrom(
+                IERC20(airdropTokenAddress), address(this), account, feeAmount
+            );
+            // Execute the transferFrom call
+            _execute(feeTransferExecutions);
+        }
     }
 
     /*//////////////////////////////////////////////////////////////////////////
