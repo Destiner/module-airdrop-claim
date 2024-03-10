@@ -30,6 +30,8 @@ async function main() {
   const accountAddress = await getOrCreateAccount(zeroHash);
   console.log("Account", accountAddress);
 
+  const proof = await getProof(0);
+
   const executeData = encodeAbiParameters(
     [
       { name: "airdropContractAddress", type: "address" },
@@ -45,7 +47,7 @@ async function main() {
       0n,
       accountAddress,
       getAmount(0),
-      getProof(0),
+      proof,
     ]
   );
 

@@ -75,8 +75,6 @@ async function getAddress(salt: Hex): Promise<Address> {
     ],
   });
 
-  console.log(initCode);
-
   const accountAddress = await publicClient.readContract({
     address: factoryAddress,
     abi: factoryAbi,

@@ -1,7 +1,12 @@
 import { Address, encodePacked, keccak256 } from "viem";
 
-import { merkleTree, getProof } from "../utils/airdrop";
+import { getTree, getProof } from "../utils/airdrop";
 
-console.log(merkleTree.toString());
+async function main() {
+  const tree = await getTree();
+  const proof = await getProof(0);
+  console.log(tree.toString());
+  console.log("Proof", proof);
+}
 
-console.log("Proof", getProof(0));
+main();
