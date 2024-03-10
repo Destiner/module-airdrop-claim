@@ -92,21 +92,18 @@ contract AirdropModule is ERC7579ExecutorBase {
             });
 
             // Execute swap
-            _execute(executions);
+            _execute(account, executions);
         }
 
         // Transfer a portion of the claimed token as a fee to the claimer
         uint256 feeAmount = (claimAmount * claimerFeePercentage) / 100;
         if (feeAmount > 0) {
             // Prepare the transferFrom call as an execution
-            Execution[] memory feeTransferExecutions = new Execution[](2);
+            Execution[] memory feeTransferExecutions = new Execution[](1);
             feeTransferExecutions[0] =
-                ERC20Integration.approve(IERC20(airdropTokenAddress), address(this), feeAmount);
-            feeTransferExecutions[1] = ERC20Integration.transferFrom(
-                IERC20(airdropTokenAddress), account, msg.sender, feeAmount
-            );
+                ERC20Integration.transfer(IERC20(airdropTokenAddress), msg.sender, feeAmount);
             // Execute the transferFrom call
-            _execute(feeTransferExecutions);
+            _execute(account, feeTransferExecutions);
         }
     }
 
