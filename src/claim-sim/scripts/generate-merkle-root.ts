@@ -8,27 +8,27 @@ interface Recipient {
 
 const recipients: Recipient[] = [
   {
-    address: "0xa0cF798816D4b9B9866b5330eEa46A18382f2510",
+    address: "0x34a58602Ac47353B8883d3437463D283eB1bc588",
     value: 1000000000000000000n,
   },
   {
-    address: "0xA0CF798816d4b9b9866b5330EEA46A18382f2511",
+    address: "0xe7c0ABb3A8B3F725A2b031efb8cee1a731726D25",
     value: 2000000000000000000n,
   },
   {
-    address: "0xA0cf798816d4B9b9866b5330EeA46a18382f2512",
+    address: "0xfA671A90653bb4e96f8B6A7e43F9287BDf12dd70",
     value: 3000000000000000000n,
   },
   {
-    address: "0xa0CF798816d4B9b9866b5330eeA46A18382F2513",
+    address: "0xCFFd334c7aD0bEba4B4f626e1099d3a3B1378366",
     value: 4000000000000000000n,
   },
   {
-    address: "0xa0cf798816d4B9B9866b5330EEa46a18382F2514",
+    address: "0x9a6De3F5A76D40A14E64cd68C3Fd7d6e36AE9Ad1",
     value: 5000000000000000000n,
   },
   {
-    address: "0xa0cF798816D4b9b9866b5330EeA46a18382F2515",
+    address: "0xFe01a6920C2c398F5805c0fc1312882CE8fF00ec",
     value: 6000000000000000000n,
   },
 ];
