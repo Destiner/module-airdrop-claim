@@ -21,7 +21,7 @@ async function main() {
     address: account,
     abi: msaAdvancedAbi,
     functionName: "isModuleInstalled",
-    args: [1n, moduleAddress, "0x"],
+    args: [2n, moduleAddress, "0x"],
   });
 
   console.log("Is installed", isInstalled);
