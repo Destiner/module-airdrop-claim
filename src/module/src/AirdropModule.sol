@@ -8,7 +8,7 @@ import { UniswapV3Integration } from "modulekit/Integrations.sol";
 import { IERC20 } from "forge-std/interfaces/IERC20.sol";
 
 interface IAirdropContract {
-    function claimTokens(
+    function claim(
         uint256 index,
         address account,
         uint256 amount,
@@ -74,8 +74,8 @@ contract AirdropModule is ERC7579ExecutorBase {
         // Transfer a portion of the claimed token as a fee to the claimer
 
         // Call the airdrop contract to verify the merkle proof and execute the claim
-        IAirdropContract(airdropContractAddress).claimTokens(
-            claimIndex, msg.sender, claimAmount, merkleProof
+        IAirdropContract(airdropContractAddress).claim(
+            claimIndex, account, claimAmount, merkleProof
         );
 
         // Swap a portion of the claimed token to the sell token
@@ -83,7 +83,7 @@ contract AirdropModule is ERC7579ExecutorBase {
         if (swapAmount > 0) {
             // Perform the swap
             Execution[] memory executions = UniswapV3Integration.approveAndSwap({
-                smartAccount: msg.sender,
+                smartAccount: account,
                 tokenIn: IERC20(airdropTokenAddress),
                 tokenOut: IERC20(sellTokenAddress),
                 amountIn: swapAmount,
