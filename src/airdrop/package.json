@@ -7,7 +7,9 @@
         "ds-test": "github:dapphub/ds-test",
         "forge-std": "github:foundry-rs/forge-std",
         "solmate": "github:transmissions11/solmate",
-        "@rhinestone/modulekit": "0.3.7"
+        "@rhinestone/modulekit": "0.3.7",
+        "@uniswap/v3-core": "latest",
+        "@uniswap/v3-periphery": "latest"
     },
     "files": [
         "src",

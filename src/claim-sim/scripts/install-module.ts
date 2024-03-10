@@ -1,10 +1,10 @@
 import {
-  createPublicClient,
-  createWalletClient,
-  http,
-  zeroAddress,
-  zeroHash,
-  encodeAbiParameters,
+    createPublicClient,
+    createWalletClient,
+    http,
+    zeroAddress,
+    zeroHash,
+    encodeAbiParameters,
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia } from "viem/chains";
@@ -15,13 +15,13 @@ import msaAdvancedAbi from "../abi/msaAdvanced";
 import { privateKey } from "../utils/env";
 
 const publicClient = createPublicClient({
-  chain: sepolia,
-  transport: http(),
+    chain: sepolia,
+    transport: http(),
 });
 const walletClient = createWalletClient({
-  chain: sepolia,
-  transport: http(),
-  account: privateKeyToAccount(privateKey),
+    chain: sepolia,
+    transport: http(),
+    account: privateKeyToAccount(privateKey),
 });
 
 const bootstrapAddress = "0x5e9F3feeC2AA6706DF50de955612D964f115523B";
@@ -33,88 +33,88 @@ const sellToken = zeroAddress;
 const sellShare = 0n;
 
 async function getAccount() {
-  const moduleAddress = "0xB9fA6fEe2bFD3B40106B29D81544FBa045dfB236";
-  const moduleData = encodeAbiParameters(
-    [
-      { name: "sellToken", type: "address" },
-      { name: "sellShare", type: "uint256" },
-    ],
-    [sellToken, sellShare]
-  );
+    const moduleAddress = "0xB9fA6fEe2bFD3B40106B29D81544FBa045dfB236";
+    const moduleData = encodeAbiParameters(
+        [
+            { name: "sellToken", type: "address" },
+            { name: "sellShare", type: "uint256" },
+        ],
+        [sellToken, sellShare]
+    );
 
-  const initCode = await publicClient.readContract({
-    address: bootstrapAddress,
-    abi: bootstrapAbi,
-    functionName: "_getInitMSACalldata",
-    args: [
-      [
-        {
-          module: "0xf83d07238a7C8814a48535035602123Ad6DbfA63",
-          data: "0x",
-        },
-      ],
-      [
-        {
-          module: moduleAddress,
-          data: moduleData,
-        },
-      ],
-      {
-        module: zeroAddress,
-        data: "0x",
-      },
-      [],
-    ],
-  });
+    const initCode = await publicClient.readContract({
+        address: bootstrapAddress,
+        abi: bootstrapAbi,
+        functionName: "_getInitMSACalldata",
+        args: [
+            [
+                {
+                    module: "0xf83d07238a7C8814a48535035602123Ad6DbfA63",
+                    data: "0x",
+                },
+            ],
+            [
+                {
+                    module: moduleAddress,
+                    data: moduleData,
+                },
+            ],
+            {
+                module: zeroAddress,
+                data: "0x",
+            },
+            [],
+        ],
+    });
 
-  console.log(initCode);
+    console.log(initCode);
 
-  const accountAddress = await publicClient.readContract({
-    address: factoryAddress,
-    abi: factoryAbi,
-    functionName: "getAddress",
-    args: [zeroHash, initCode],
-  });
+    const accountAddress = await publicClient.readContract({
+        address: factoryAddress,
+        abi: factoryAbi,
+        functionName: "getAddress",
+        args: [zeroHash, initCode],
+    });
 
-  const isAccountCreated = await publicClient.getBytecode({
-    address: accountAddress,
-  });
+    const isAccountCreated = await publicClient.getBytecode({
+        address: accountAddress,
+    });
 
-  if (isAccountCreated) {
+    if (isAccountCreated) {
+        return accountAddress;
+    }
+
+    const txHash = await walletClient.writeContract({
+        address: factoryAddress,
+        abi: factoryAbi,
+        functionName: "createAccount",
+        args: [zeroHash, initCode],
+    });
+
+    console.log("Creating the account", txHash);
+
+    const receipt = await publicClient.waitForTransactionReceipt({
+        hash: txHash,
+    });
+
+    console.log("Created", receipt);
+
     return accountAddress;
-  }
-
-  const txHash = await walletClient.writeContract({
-    address: factoryAddress,
-    abi: factoryAbi,
-    functionName: "createAccount",
-    args: [zeroHash, initCode],
-  });
-
-  console.log("Creating the account", txHash);
-
-  const receipt = await publicClient.waitForTransactionReceipt({
-    hash: txHash,
-  });
-
-  console.log("Created", receipt);
-
-  return accountAddress;
 }
 
 async function main() {
-  // Check whether the module is installed
-  const account = await getAccount();
-  const moduleAddress = "0xB9fA6fEe2bFD3B40106B29D81544FBa045dfB236";
+    // Check whether the module is installed
+    const account = await getAccount();
+    const moduleAddress = "0xB9fA6fEe2bFD3B40106B29D81544FBa045dfB236";
 
-  const isInstalled = await publicClient.readContract({
-    address: account,
-    abi: msaAdvancedAbi,
-    functionName: "isModuleInstalled",
-    args: [1n, moduleAddress, "0x"],
-  });
+    const isInstalled = await publicClient.readContract({
+        address: account,
+        abi: msaAdvancedAbi,
+        functionName: "isModuleInstalled",
+        args: [1n, moduleAddress, "0x"],
+    });
 
-  console.log("Is installed", isInstalled);
+    console.log("Is installed", isInstalled);
 }
 
 main();
