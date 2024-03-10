@@ -5,7 +5,7 @@ import {
   zeroAddress,
   zeroHash,
   encodeAbiParameters,
-  parseUnits,
+  // parseUnits,
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia } from "viem/chains";
@@ -96,6 +96,7 @@ async function getAccount() {
     abi: factoryAbi,
     functionName: "createAccount",
     args: [zeroHash, initCode],
+    // gasPrice: parseUnits("10", 9),
   });
 
   console.log("Creating the account", txHash);
