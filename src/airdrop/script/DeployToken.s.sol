@@ -9,7 +9,7 @@ contract DeployTokenScript is Script {
         vm.startBroadcast(vm.envUint("PK"));
 
         Create2 create2 = Create2(vm.envAddress("CREATE_2_FACTORY"));
-        bytes32 salt = bytes32(0);
+        bytes32 salt = bytes32(0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef);
         bytes memory bytecode = type(Token).creationCode;
         bytes memory deploymentBytecode = abi.encodePacked(bytecode, abi.encode("Token", "TKN1", msg.sender));
 
