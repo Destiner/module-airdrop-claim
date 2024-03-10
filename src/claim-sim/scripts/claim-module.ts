@@ -22,16 +22,16 @@ const walletClient = createWalletClient({
 async function main() {
   const accountAddress = await getAccount();
   console.log("Account", accountAddress);
-  const moduleAddress = "0xB9fA6fEe2bFD3B40106B29D81544FBa045dfB236";
+  const moduleAddress = "0xB18003A7c7288ed08413eAeD0C9D16e5c7632376";
 
-  const airdropContractAddress = "0x5d8c8F75CEE825Eb0e2e84745FbBEe597cB7F594";
+  const airdropContractAddress = "0x8c75Ac392b0097AE6Eaf7d7896055211aD3459f2";
   const airdropTokenAddress = "0x1E53588a0f3d3BEf7308655FAEa92eCc9403600f";
   const claimIndex = 0n;
   const claimAmount = 1000000000000000000n;
   const merkleProof: Hex[] = [
-    "0x5966d0f3b6602c74bdeeac2f7acc949166d3159d2b4bea5e6ad65afdeb0c9c4b",
-    "0x74af377f3b6f5ab7fd654a8ff9e0d315c53a1ac9d81c55ddeb81a20874777672",
-    "0x587137ce2ceeebd1cd711cc95701d6c244e167af57a2216d5af633edd1b712d0",
+    "0x300e12ac200996bab07dadbeba6db03a2243136103492bfe2cfa82a0c0fc4b6f",
+    "0x24000377fd1fe3aee8994ae25f46994eb193163670ffeac9365086225bfcc8aa",
+    "0xda357633cfd8963bdfd7ba9e812af5db35281f49e815f1853f6388b74a9f473b",
   ];
   const executeData = encodeAbiParameters(
     [

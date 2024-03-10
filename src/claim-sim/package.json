@@ -5,6 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "@types/node": "^20.11.25",
+    "@uniswap/sdk-core": "^4.2.0",
+    "@uniswap/v3-sdk": "^3.11.0",
     "dotenv": "^16.4.5",
     "merkletreejs": "^0.3.11",
     "solidity-create2-deployer": "^0.4.0",
