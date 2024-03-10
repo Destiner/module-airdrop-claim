@@ -5,6 +5,7 @@ import {
   zeroAddress,
   zeroHash,
   encodeAbiParameters,
+  parseUnits,
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia } from "viem/chains";
@@ -12,16 +13,17 @@ import { sepolia } from "viem/chains";
 import bootstrapAbi from "../abi/msaBootstrap";
 import factoryAbi from "../abi/msaFactory";
 import msaAdvancedAbi from "../abi/msaAdvanced";
-import { privateKey } from "../utils/env";
+import { deploymentRpc, privateKey } from "../utils/env";
 
+const account = privateKeyToAccount(privateKey);
 const publicClient = createPublicClient({
   chain: sepolia,
-  transport: http(),
+  transport: http(deploymentRpc),
 });
 const walletClient = createWalletClient({
   chain: sepolia,
-  transport: http(),
-  account: privateKeyToAccount(privateKey),
+  transport: http(deploymentRpc),
+  account,
 });
 
 const bootstrapAddress = "0x5e9F3feeC2AA6706DF50de955612D964f115523B";
@@ -33,6 +35,11 @@ const sellToken = zeroAddress;
 const sellShare = 0n;
 
 async function getAccount() {
+  const validatorData = encodeAbiParameters(
+    [{ name: "owner", type: "address" }],
+    [account.address]
+  );
+
   const moduleAddress = "0xB9fA6fEe2bFD3B40106B29D81544FBa045dfB236";
   const moduleData = encodeAbiParameters(
     [
@@ -50,7 +57,7 @@ async function getAccount() {
       [
         {
           module: "0xf83d07238a7C8814a48535035602123Ad6DbfA63",
-          data: "0x",
+          data: validatorData,
         },
       ],
       [
@@ -93,11 +100,11 @@ async function getAccount() {
 
   console.log("Creating the account", txHash);
 
-  const receipt = await publicClient.waitForTransactionReceipt({
+  await publicClient.waitForTransactionReceipt({
     hash: txHash,
   });
 
-  console.log("Created", receipt);
+  console.log("Created");
 
   return accountAddress;
 }
@@ -111,7 +118,7 @@ async function main() {
     address: account,
     abi: msaAdvancedAbi,
     functionName: "isModuleInstalled",
-    args: [1n, moduleAddress, "0x"],
+    args: [2n, moduleAddress, "0x"],
   });
 
   console.log("Is installed", isInstalled);
