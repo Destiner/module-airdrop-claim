@@ -9,7 +9,7 @@ import { getAccount } from "../utils/account";
 const account = privateKeyToAccount(privateKey);
 const publicClient = createPublicClient({
   chain: sepolia,
-  transport: http(deploymentRpc),
+  transport: http(),
 });
 
 async function main() {
@@ -21,7 +21,7 @@ async function main() {
     address: account,
     abi: msaAdvancedAbi,
     functionName: "isModuleInstalled",
-    args: [2n, moduleAddress, "0x"],
+    args: [1n, moduleAddress, "0x"],
   });
 
   console.log("Is installed", isInstalled);

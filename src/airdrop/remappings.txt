@@ -3,3 +3,4 @@ forge-std/=node_modules/forge-std/src/
 solmate/=node_modules/solmate/src/
 @openzeppelin/=node_modules/@openzeppelin/
 modulekit/=node_modules/@rhinestone/modulekit/packages/modulekit/src/   
+@uniswap/=node_modules/@uniswap/
