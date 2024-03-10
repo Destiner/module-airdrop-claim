@@ -1,4 +1,6 @@
 import {
+  Address,
+  Hex,
   createPublicClient,
   createWalletClient,
   encodeAbiParameters,
@@ -33,21 +35,57 @@ const walletClient = createWalletClient({
 
 const bootstrapAddress = "0x5e9F3feeC2AA6706DF50de955612D964f115523B";
 
-async function getAccount() {
-  const validatorData = encodeAbiParameters(
-    [{ name: "owner", type: "address" }],
-    [account.address]
-  );
+const validatorData = encodeAbiParameters(
+  [{ name: "owner", type: "address" }],
+  [account.address]
+);
 
-  const moduleAddress = "0xB18003A7c7288ed08413eAeD0C9D16e5c7632376";
-  const moduleData = encodeAbiParameters(
-    [
-      { name: "sellToken", type: "address" },
-      { name: "sellShare", type: "uint256" },
+const moduleAddress = "0x9d59106fD52ddC8d0F746108479E471791B3F598";
+const moduleData = encodeAbiParameters(
+  [
+    { name: "sellToken", type: "address" },
+    { name: "sellShare", type: "uint256" },
+  ],
+  [sellToken, sellShare]
+);
+
+async function getAddress(salt: Hex): Promise<Address> {
+  const initCode = await publicClient.readContract({
+    address: bootstrapAddress,
+    abi: bootstrapAbi,
+    functionName: "_getInitMSACalldata",
+    args: [
+      [
+        {
+          module: "0xf83d07238a7C8814a48535035602123Ad6DbfA63",
+          data: validatorData,
+        },
+      ],
+      [
+        {
+          module: moduleAddress,
+          data: moduleData,
+        },
+      ],
+      {
+        module: zeroAddress,
+        data: "0x",
+      },
+      [],
     ],
-    [sellToken, sellShare]
-  );
+  });
 
+  const accountAddress = await publicClient.readContract({
+    address: factoryAddress,
+    abi: factoryAbi,
+    functionName: "getAddress",
+    args: [salt, initCode],
+  });
+
+  return accountAddress;
+}
+
+async function getOrCreateAccount(salt: Hex) {
   const initCode = await publicClient.readContract({
     address: bootstrapAddress,
     abi: bootstrapAbi,
@@ -79,7 +117,7 @@ async function getAccount() {
     address: factoryAddress,
     abi: factoryAbi,
     functionName: "getAddress",
-    args: [zeroHash, initCode],
+    args: [salt, initCode],
   });
 
   const isAccountCreated = await publicClient.getBytecode({
@@ -94,7 +132,7 @@ async function getAccount() {
     address: factoryAddress,
     abi: factoryAbi,
     functionName: "createAccount",
-    args: [zeroHash, initCode],
+    args: [salt, initCode],
     // gasPrice: parseUnits("10", 9),
   });
 
@@ -109,4 +147,4 @@ async function getAccount() {
   return accountAddress;
 }
 
-export { getAccount };
+export { getAddress, getOrCreateAccount, moduleAddress };

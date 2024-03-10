@@ -1,30 +1,37 @@
-import { createPublicClient, createWalletClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
+import { Hex, createPublicClient, http, zeroHash } from "viem";
 import { sepolia } from "viem/chains";
 
 import msaAdvancedAbi from "../abi/msaAdvanced";
-import { deploymentRpc, privateKey } from "../utils/env";
-import { getAccount } from "../utils/account";
+import { moduleAddress, getOrCreateAccount } from "../utils/account";
 
-const account = privateKeyToAccount(privateKey);
 const publicClient = createPublicClient({
   chain: sepolia,
   transport: http(),
 });
 
+const salts: Hex[] = [
+  "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "0x0000000000000000000000000000000000000000000000000000000000000001",
+  "0x0000000000000000000000000000000000000000000000000000000000000002",
+  "0x0000000000000000000000000000000000000000000000000000000000000003",
+  "0x0000000000000000000000000000000000000000000000000000000000000004",
+  "0x0000000000000000000000000000000000000000000000000000000000000005",
+];
+
 async function main() {
-  // Check whether the module is installed
-  const account = await getAccount();
-  const moduleAddress = "0xB18003A7c7288ed08413eAeD0C9D16e5c7632376";
+  for (const salt of salts) {
+    // Check whether the module is installed
+    const account = await getOrCreateAccount(salt);
 
-  const isInstalled = await publicClient.readContract({
-    address: account,
-    abi: msaAdvancedAbi,
-    functionName: "isModuleInstalled",
-    args: [2n, moduleAddress, "0x"],
-  });
+    const isInstalled = await publicClient.readContract({
+      address: account,
+      abi: msaAdvancedAbi,
+      functionName: "isModuleInstalled",
+      args: [2n, moduleAddress, "0x"],
+    });
 
-  console.log("Is installed", isInstalled);
+    console.log("Is installed", isInstalled);
+  }
 }
 
 main();
